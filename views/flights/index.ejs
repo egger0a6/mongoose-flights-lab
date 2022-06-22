@@ -11,6 +11,8 @@
         <th>Airport</th>
         <th>Flight Number</th>
         <th>Departs</th>
+        <th>Details</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +23,7 @@
           <td><%= flight.flightNo %></td>
           <%# format date object to look more readable %>
           <td><%= flight.departs.toISOString().slice(0, 16).split("T").join(" ") %></td>
+          <td><a href="/flights/<%= flight._id %>">Details</a></td>
           <td>
             <form action="/flights/<%= flight._id %>?_method=DELETE" method="post">
               <button>Remove</button>

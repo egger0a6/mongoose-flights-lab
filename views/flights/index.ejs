@@ -1,0 +1,35 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/movies/index.css" />
+<%- include('../partials/nav') %>
+
+<main>
+  <h1>Flight List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Airline</th>
+        <th>Airport</th>
+        <th>Flight Number</th>
+        <th>Departs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flights.forEach((flight) => { %> 
+        <tr>
+          <td><%= flight.airline %></td>
+          <td><%= flight.airport %></td>
+          <td><%= flight.flightNo %></td>
+          <%# format date object to look more readable %>
+          <td><%= flight.departs.toISOString().slice(0, 16).split("T").join(" ") %></td>
+          <td>
+            <form action="/flights/<%= flight._id %>?_method=DELETE" method="post">
+              <button>Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %> 
+    </tbody>
+  </table>
+</main>
+
+<%- include('../partials/footer') %>

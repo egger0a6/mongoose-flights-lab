@@ -22,7 +22,7 @@ function create(req, res) {
 	}
   Flight.create(req.body)
   .then((flight) => {
-    res.redirect(`/flights/${flight._id}`);
+    res.redirect(`/flights/`);
   })
   .catch((error) => {
     console.log(error);

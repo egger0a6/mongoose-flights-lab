@@ -1,20 +1,35 @@
 </head>
 <body>
-  <nav>
-		<i class="fa-solid fa-plane"></i>
-    <a 
-      href="/meals/new" <%- title === 'Add Meal' ? 'class="active"' : '' %>
-    >
-      ADD MEAL
-    </a>
-    <a 
-      href="/flights/new" <%- title === 'Add Flight' ? 'class="active"' : '' %>
-    >
-      ADD FLIGHT
-    </a>
-    <a 
-      href="/flights" <%- title === "All Flights" ? "class='active'" : "" %>
-    >
-      ALL FLIGHTS
-  </a>
+  <nav class="navbar navbar-dark" style="background-color: #424242;">
+    <div class="container-fluid">
+      <i class="fa-solid fa-plane navbar-brand"></i>
+      <div class="justify-content-start">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a 
+              href="/meals/new"
+              class="nav-link"
+            >
+              ADD MEAL
+            </a>
+          </li>
+          <li class="nav-item">
+            <a 
+              href="/flights/new"
+              class="nav-link"
+            >
+              ADD FLIGHT
+            </a>
+          </li>
+          <li class="nav-item">
+            <a 
+              href="/flights"
+              class="nav-link"
+            >
+              ALL FLIGHTS
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>

@@ -19,6 +19,48 @@
     <div>Departs: </div>
     <div><%= flight.departs.toISOString().slice(0, 16).split("T").join(" ") %></div>
   </section>
+
+  <h2>Tickets</h2>
+  <form 
+    id="add-tickets-form"
+    action="/flights/<%= flight._id %>/tickets"
+    method="POST"
+  >
+    <label for="seat-input">Seat (A1-F99):</label>
+    <input type="text" name="seat" id="seat-input" required pattern="[A-F][1-9]\d?">
+    <label for="price-input">Price:</label>
+    <input type="number" name="price" id="price-input" min="0">
+    <button type="submit">Add Ticket</button>
+  </form>
+
+	<% if (flight.tickets.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Seat</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let total = 0 %> 
+        <% flight.tickets.forEach(function(ticket) { %>
+          <% total += 1 %>
+          <tr>
+            <td><%= ticket.seat %></td>
+            <td><%= ticket.price %></td>
+          </tr>
+        <% }) %>
+        <tr>
+          <td colspan="2"></td>
+          <td>
+            <strong><%= total %></strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% } else { %>
+    <h3>No Tickets Yet</h3>
+  <% } %>
 </main>
   
 <%- include('../partials/footer') %>

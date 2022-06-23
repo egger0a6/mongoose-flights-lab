@@ -24,7 +24,7 @@ function create(req, res) {
   })
   .catch((error) => {
     console.log(error);
-    res.redirect("/flights");
+    res.redirect("/");
   })
 }
 
@@ -59,10 +59,56 @@ function show(req, res) {
   })
 }
 
+function edit(req, res) {
+  Flight.findById(req.params.id)
+  .then((flight) => {
+    res.render("flights/edit", {
+      flight: flight,
+      title: "Edit Flight Details"
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+    res.redirect("/");
+  })
+}
+
+function update(req, res) {
+  for (let key in req.body) {
+	  if (req.body[key] === '') delete req.body[key]
+	}
+  Flight.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then((flight) => {
+    res.redirect(`/flights/${flight._id}`);
+  })
+  .catch((error) => {
+    console.log(error);
+    res.redirect("/");
+  })
+}
+
+function createTicket(req, res) {
+  Flight.findById(req.params.id)
+  .then((flight) => {
+    flight.tickets.push(req.body);
+    flight.save()
+    .then(() => {
+      res.redirect(`/flights/${flight._id}`);
+    })
+  })
+  .catch((error) => {
+    console.log(error);
+    res.redirect("/");
+  })
+}
+
 export {
   index,
   create,
   show,
+  edit,
+  update,
+  createTicket,
   newFlight as new,
   deleteFlight as delete
 }

@@ -1,0 +1,43 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/movies/new.css" />
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <form id="new-form" action="/flights/<%= flight._id %>?_method=PUT" method="post">
+    <label for="airline-select">Airline:</label>
+    <select name="airline" id="airline-select" value="<%= flight.airline %>">
+      <%# set defauly selected airline in edit view to the same as the flight %>
+      <%# currently being edited. Loop to create select options needed for this %>
+      <% const airlines=["American", "Southwest", "United"]%>
+      <% airlines.forEach((airline) => { %>
+        <% let selected = (flight.airline === airline) ? "selected" : "" %>
+        <option value="<%= airline %>" <%= selected %>><%= airline %></option>
+      <% }) %>
+    </select>
+    <label for="airport-select">Airport:</label>
+    <select name="airport" id="airport-select" value="<%= flight.airport %>">
+      <%# set defauly selected airport in edit view to the same as the flight %>
+      <%# currently being edited. Loop needed again %>
+      <% const airports=["AUS", "DFW", "DEN", "LAX", "SAN"]%>
+      <% airports.forEach((airport) => { %>
+        <% let selected = (flight.airport === airport) ? "selected" : "" %>
+        <option value="<%= airport %>" <%= selected %>><%= airport %></option>
+      <% }) %>
+    </select>
+    <label for="flight-no-input">Flight Number:</label>
+    <input type="number" name="flightNo" id="flight-no-input" min="10" max="9999" value="<%= flight.flightNo %>">
+    <label for="departs-input">Departs:</label>
+    <input
+      type="datetime-local"
+      name="departs"
+      id="departs-input"
+      <%# set default value of date input to one year from current UTC time %>
+      <%# let date = new Date(Date.now() + (365*24*60*60000)).toISOString().slice(0, 16) %>
+      value="<%= flight.departs.toISOString().slice(0, 16) %>"
+    >
+    <button type="submit">Save Flight</button>
+  </form>
+</main>
+
+<%- include("../partials/footer") %>

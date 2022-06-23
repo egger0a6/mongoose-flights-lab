@@ -18,6 +18,7 @@
     <div><%= flight.flightNo %></div>
     <div>Departs: </div>
     <div><%= flight.departs.toISOString().slice(0, 16).split("T").join(" ") %></div>
+    <div><a href="/flights" class="btn btn-primary">Return to Flights</a></div>
 
     <div>Meals:</div>
       <ul>

@@ -40,7 +40,8 @@ const flightSchema = new Schema({
     // default date is one year from current UTC time
     default: () => new Date(Date.now() + (365*24*60*60000)).toISOString().slice(0, 16)
   },
-  tickets: [ticketSchema]
+  tickets: [ticketSchema],
+  meals: [{type: Schema.Types.ObjectId, ref: "Meal"}]
 },
 {
   timestamps: true
